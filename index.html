@@ -8,22 +8,16 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f5f6fa;min-height:100vh;color:#333}
-
-/* ── 헤더 ── */
 .hdr{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:20px 20px 0}
-.hdr-inner{max-width:900px;margin:0 auto}
+.hdr-inner{max-width:960px;margin:0 auto}
 .hdr h1{font-size:22px;margin-bottom:3px;display:flex;align-items:center;gap:8px}
 .hdr p{font-size:12px;opacity:.8;margin-bottom:14px}
 .tabs{display:flex;gap:2px}
 .tab{padding:10px 20px;background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.9);cursor:pointer;font-size:13px;font-weight:600;border-radius:8px 8px 0 0;transition:.18s}
 .tab:hover{background:rgba(255,255,255,.28)}
 .tab.on{background:#fff;color:#667eea}
-
-/* ── 본문 ── */
-.wrap{max-width:900px;margin:0 auto;padding:22px 18px 60px}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 18px 60px}
 .panel{display:none}.panel.on{display:block}
-
-/* ── 버튼 ── */
 .btn{display:inline-flex;align-items:center;gap:5px;padding:9px 18px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;transition:.18s;white-space:nowrap;text-decoration:none}
 .btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 5px 15px rgba(102,126,234,.4)}
 .btn:disabled{opacity:.45;cursor:default}
@@ -33,22 +27,16 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f5f6fa;
 .btn.wh:hover{background:#667eea;color:#fff}
 .btn.sm{padding:6px 13px;font-size:12px}
 .brow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-
-/* ── 알림바 ── */
 .bar{padding:10px 14px;border-radius:7px;font-size:12px;margin:10px 0;display:none}
 .bar.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8}
 .bar.ok{background:#f0fdf4;border:1px solid #86efac;color:#166534}
 .bar.err{background:#fef2f2;border:1px solid #fca5a5;color:#dc2626}
 .bar.warn{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
-
-/* ── 업로드 존 ── */
 .drop{border:2px dashed #c4b5fd;border-radius:12px;padding:32px;text-align:center;cursor:pointer;background:#faf5ff;transition:.2s;user-select:none}
 .drop:hover,.drop.over{border-color:#8b5cf6;background:#f3e8ff}
 .drop .di{font-size:44px;margin-bottom:10px}
 .drop .dt{font-size:14px;color:#7c3aed;font-weight:600}
 .drop .ds{font-size:11px;color:#aaa;margin-top:5px}
-
-/* ── 이미지 그리드 ── */
 .igrid{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;min-height:0}
 .icard{width:108px;flex-shrink:0;position:relative}
 .icard img{width:108px;height:82px;object-fit:cover;border-radius:7px;border:2px solid #e5e7eb;display:block}
@@ -56,20 +44,50 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f5f6fa;
 .icard .ibadge{position:absolute;top:4px;right:4px;background:#f59e0b;color:#fff;font-size:8px;padding:2px 5px;border-radius:8px;font-weight:700}
 .icard .idel{position:absolute;top:4px;left:4px;background:rgba(220,38,38,.85);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
-/* ── 결과 테이블 ── */
-.tbox{overflow-x:auto;margin:10px 0}
-table.rt{width:100%;border-collapse:collapse;font-size:12px}
-.rt th{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:9px 8px;text-align:center;white-space:nowrap}
-.rt th:first-child{border-radius:4px 0 0 0}
-.rt th:last-child{border-radius:0 4px 0 0}
-.rt td{padding:5px 7px;border:1px solid #e9ecef;vertical-align:middle}
-.rt tr:nth-child(even) td{background:#f8f8ff}
-.rt td input{width:100%;border:none;background:transparent;font-size:12px;padding:1px 2px;outline:none}
-.rt td input:focus{background:#fffde7;border-radius:2px}
-.rt .num input{text-align:right}
-.rt .del-btn{background:#fee2e2;border:none;border-radius:4px;padding:2px 7px;color:#dc2626;cursor:pointer;font-size:11px;font-weight:700}
+/* ══ 결과 테이블 ══ */
+.tbox{overflow-x:auto;margin:10px 0;border-radius:10px;box-shadow:0 2px 14px rgba(102,126,234,.13)}
+table.rt{border-collapse:collapse;font-size:12px;table-layout:auto;width:max-content;min-width:100%}
 
-/* ── 설정 카드 ── */
+/* ▸ 헤더 – 밝은 라벤더 계열 */
+.rt thead th{
+  background:linear-gradient(135deg,#dde5ff 0%,#c7d2fe 100%);
+  color:#3730a3;
+  padding:10px 12px;text-align:center;white-space:nowrap;
+  font-size:12px;font-weight:700;letter-spacing:.3px;
+  border-bottom:2px solid #a5b4fc
+}
+.rt thead th:first-child{border-radius:10px 0 0 0}
+.rt thead th:last-child {border-radius:0 10px 0 0}
+
+/* ▸ 행 색상 */
+.rt tbody tr:nth-child(odd)  td{background:#ffffff}
+.rt tbody tr:nth-child(even) td{background:#f0f4ff}
+.rt tbody tr:hover td{background:#dde8ff !important;transition:background .12s}
+
+/* ▸ 셀 공통 */
+.rt td{
+  padding:5px 10px;border:1px solid #d6ddf6;
+  vertical-align:middle;white-space:nowrap
+}
+.rt td input{
+  border:none;background:transparent;
+  font-size:12px;padding:1px 2px;outline:none;
+  display:block;width:100%;min-width:0
+}
+.rt td input:focus{background:#fffce8;border-radius:3px;box-shadow:0 0 0 2px #fcd34d55}
+
+/* ▸ 숫자 열 */
+.rt .num input{text-align:right;color:#1e40af;font-variant-numeric:tabular-nums}
+.rt tbody tr:nth-child(odd)  .num{background:#f0f6ff}
+.rt tbody tr:nth-child(even) .num{background:#e0eaff}
+
+/* ▸ 삭제 버튼 */
+.rt .del-btn{background:#fee2e2;border:none;border-radius:4px;padding:2px 7px;color:#dc2626;cursor:pointer;font-size:11px;font-weight:700}
+.rt .del-btn:hover{background:#fca5a5}
+
+/* ▸ 소계 행 */
+.rt tbody tr.sub-row td{background:#dde5ff !important;font-weight:700;border-top:2px solid #a5b4fc;color:#1e3a8a}
+
 .scard{background:#fff;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:22px;max-width:520px;margin-bottom:14px}
 .scard h3{font-size:15px;font-weight:700;margin-bottom:16px;color:#333}
 .fg{margin-bottom:15px}
@@ -77,35 +95,22 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
 .fg input,.fg select{width:100%;padding:10px 12px;border:1.5px solid #d1d5db;border-radius:7px;font-size:13px;transition:.18s}
 .fg input:focus,.fg select:focus{outline:none;border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.1)}
 .fg .note{font-size:10px;color:#aaa;margin-top:5px;line-height:1.5}
-.irow{display:flex;gap:7px}
-.irow input{flex:1}
+.irow{display:flex;gap:7px}.irow input{flex:1}
 .kbadge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;margin-left:7px}
 .kbadge.on{background:#d1fae5;color:#065f46}
 .kbadge.off{background:#fee2e2;color:#dc2626}
-
-/* ── 로딩 ── */
 #ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center}
 #ov.show{display:flex}
 .lbox{background:#fff;border-radius:14px;padding:30px 40px;text-align:center}
 .lbox .sp{width:44px;height:44px;border:4px solid #e5e7eb;border-top-color:#667eea;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 13px}
 .lbox p{font-size:13px;color:#666}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ── 푸터 ── */
 .footer{text-align:center;padding:22px;color:#bbb;font-size:11px}
 .footer a{color:#a5b4fc;text-decoration:none}
-
-@media(max-width:600px){
-  .hdr h1{font-size:18px}
-  .wrap{padding:14px 12px 50px}
-  .drop{padding:22px}
-  .tab{padding:8px 13px;font-size:12px}
-}
+@media(max-width:600px){.hdr h1{font-size:18px}.wrap{padding:14px 12px 50px}.drop{padding:22px}.tab{padding:8px 13px;font-size:12px}}
 </style>
 </head>
 <body>
-
-<!-- 헤더 -->
 <div class="hdr">
   <div class="hdr-inner">
     <h1>🧾 영수증 스캐너</h1>
@@ -116,54 +121,29 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
     </div>
   </div>
 </div>
-
-<!-- 로딩 -->
-<div id="ov">
-  <div class="lbox">
-    <div class="sp"></div>
-    <p id="lmsg">Claude AI 분석 중...</p>
-  </div>
-</div>
-
+<div id="ov"><div class="lbox"><div class="sp"></div><p id="lmsg">Claude AI 분석 중...</p></div></div>
 <div class="wrap">
-
-<!-- ════ 탭 0: 영수증 스캐너 ════ -->
 <div class="panel on" id="p0">
-
-  <!-- API 키 미설정 경고 -->
   <div class="bar err" id="nokey">
     ⚠️ Claude API 키가 설정되지 않았습니다.
     <button class="btn sm" style="margin-left:10px" onclick="go(1)">설정하기</button>
   </div>
-
-  <!-- 업로드 존 -->
-  <div class="drop" id="dz"
-       onclick="document.getElementById('fi').click()"
-       ondragover="dov(event)" ondragleave="dlv(event)" ondrop="ddrop(event)">
+  <div class="drop" id="dz" onclick="document.getElementById('fi').click()" ondragover="dov(event)" ondragleave="dlv(event)" ondrop="ddrop(event)">
     <div class="di">📸</div>
     <div class="dt">영수증 이미지를 클릭하거나 드래그하여 업로드</div>
     <div class="ds">JPG · PNG · WEBP · 다중 선택 가능 · 설정 용량 초과 시 자동 압축</div>
   </div>
   <input type="file" id="fi" accept="image/*" multiple style="display:none" onchange="addFiles(event)">
-
-  <!-- 이미지 미리보기 -->
   <div class="igrid" id="grid"></div>
-
-  <!-- 상태바 -->
   <div class="bar" id="sb"></div>
-
-  <!-- 액션 버튼 -->
   <div class="brow">
     <button class="btn" id="exBtn" onclick="extract()" style="display:none">🤖 Claude AI로 데이터 추출</button>
     <button class="btn wh" id="clBtn" onclick="clearAll()" style="display:none">초기화</button>
   </div>
-
-  <!-- 결과 -->
   <div id="res" style="display:none">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
       <div style="font-size:14px;font-weight:700;color:#166534">
-        📊 추출 결과
-        <span style="font-size:11px;font-weight:400;color:#999">— 셀을 클릭하여 직접 수정 가능</span>
+        📊 추출 결과 <span style="font-size:11px;font-weight:400;color:#999">— 셀을 클릭하여 직접 수정 가능</span>
       </div>
       <div class="brow" style="margin:0">
         <button class="btn gr" onclick="dlXlsx()">⬇️ 엑셀 다운로드</button>
@@ -171,29 +151,19 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
       </div>
     </div>
     <div class="tbox">
-      <table class="rt">
+      <table class="rt" id="rt">
         <thead><tr>
-          <th>날짜</th>
-          <th>업체명</th>
-          <th>품목</th>
-          <th>수량</th>
-          <th>단가</th>
-          <th>공급가액</th>
-          <th>세금</th>
-          <th>합계</th>
-          <th>결제수단</th>
-          <th>비고</th>
-          <th></th>
+          <th>날짜</th><th>상호</th><th>사업자번호</th><th>품목</th>
+          <th class="num">수량</th><th class="num">단가</th>
+          <th class="num">공급가액</th><th class="num">세액</th><th class="num">합계</th>
+          <th>결제수단</th><th>비고</th><th></th>
         </tr></thead>
         <tbody id="tb"></tbody>
       </table>
     </div>
   </div>
 </div>
-
-<!-- ════ 탭 1: 설정 ════ -->
 <div class="panel" id="p1">
-
   <div class="scard">
     <h3>🔑 Claude API 키</h3>
     <div class="fg">
@@ -203,13 +173,11 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
         <button class="btn" onclick="saveKey()">저장</button>
         <button class="btn wh" onclick="delKey()">삭제</button>
       </div>
-      <div class="note">
-        ⚠️ API 키는 브라우저 로컬(localStorage)에만 저장됩니다. 서버로 전송되지 않습니다.<br>
+      <div class="note">⚠️ API 키는 브라우저 로컬(localStorage)에만 저장됩니다. 서버로 전송되지 않습니다.<br>
         <a href="https://console.anthropic.com" target="_blank" style="color:#8b7cf8">Anthropic Console에서 발급 →</a>
       </div>
     </div>
   </div>
-
   <div class="scard">
     <h3>🤖 모델 선택</h3>
     <div class="fg">
@@ -219,10 +187,9 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
         <option value="claude-sonnet-4-6" selected>claude-sonnet-4-6 (권장 · 균형)</option>
         <option value="claude-haiku-4-5-20251001">claude-haiku-4-5 (빠름 · 경제적)</option>
       </select>
-      <div class="note">영수증 데이터 추출에 사용할 모델. Haiku가 가장 빠르고 비용이 적습니다.</div>
+      <div class="note">영수증 데이터 추출에 사용할 모델.</div>
     </div>
   </div>
-
   <div class="scard">
     <h3>🗜️ 이미지 자동 압축</h3>
     <div class="fg">
@@ -233,12 +200,8 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
         <option value="1200">1.2 MB 초과 시 압축</option>
         <option value="0">압축 안함</option>
       </select>
-      <div class="note">
-        API 전송 전 이미지를 Canvas로 리사이즈하여 속도·비용을 최적화합니다.<br>
-        원본 파일은 변경되지 않으며, 최대 가로 1600px로 제한됩니다.
-      </div>
+      <div class="note">API 전송 전 Canvas로 리사이즈. 원본 파일 변경 없음, 최대 1600px.</div>
     </div>
-
     <div class="fg">
       <label>압축 품질 (JPEG)</label>
       <select id="qs">
@@ -248,371 +211,297 @@ table.rt{width:100%;border-collapse:collapse;font-size:12px}
       </select>
     </div>
   </div>
-
   <button class="btn" onclick="saveSett()">💾 설정 저장</button>
   <div class="bar ok" id="sok" style="margin-top:12px">✅ 설정이 저장되었습니다.</div>
 </div>
-
-</div><!-- .wrap -->
-
-<div class="footer">
-  영수증 스캐너 · Claude API 기반 · SheetJS 내장 엑셀 생성<br>
-  <a href="https://console.anthropic.com" target="_blank">API 키 발급</a>
 </div>
+<div class="footer">영수증 스캐너 · Claude API 기반 · SheetJS 내장 엑셀 생성<br>
+  <a href="https://console.anthropic.com" target="_blank">API 키 발급</a></div>
 
 <script>
-// ═══════════════════════════════════════
-//  탭
-// ═══════════════════════════════════════
-const TABS = document.querySelectorAll('.tab');
-const PANELS = document.querySelectorAll('.panel');
-function go(n) {
-  TABS.forEach((t,i)=>t.classList.toggle('on',i===n));
-  PANELS.forEach((p,i)=>p.classList.toggle('on',i===n));
-  if(n===0) chkKey();
+/* ─────────────────────────────────────
+   탭
+───────────────────────────────────── */
+const TABS=document.querySelectorAll('.tab');
+const PANELS=document.querySelectorAll('.panel');
+function go(n){TABS.forEach((t,i)=>t.classList.toggle('on',i===n));PANELS.forEach((p,i)=>p.classList.toggle('on',i===n));if(n===0)chkKey();}
+
+/* ─────────────────────────────────────
+   localStorage
+───────────────────────────────────── */
+const G=k=>localStorage.getItem(k);
+const S=(k,v)=>localStorage.setItem(k,v);
+
+/* ─────────────────────────────────────
+   숫자 서식 (1,000 단위 쉼표)
+───────────────────────────────────── */
+function fmtNum(v){const raw=String(v||'').replace(/,/g,'');if(raw===''||isNaN(raw))return v;return Number(raw).toLocaleString('ko-KR');}
+function rawNum(v){return String(v||'').replace(/,/g,'');}
+function bindNumInput(inp){
+  inp.addEventListener('focus',()=>{inp.value=rawNum(inp.value);});
+  inp.addEventListener('blur', ()=>{inp.value=fmtNum(inp.value);});
 }
 
-// ═══════════════════════════════════════
-//  localStorage 헬퍼
-// ═══════════════════════════════════════
-const G = k => localStorage.getItem(k);
-const S = (k,v) => localStorage.setItem(k,v);
+/* ─────────────────────────────────────
+   카드번호 제거
+───────────────────────────────────── */
+function stripCard(s){
+  if(!s) return s;
+  return s
+    .replace(/카드\s*번호\s*[:\-]?\s*[\d\*\-\s]{13,20}/gi,'')
+    .replace(/[\d\*]{4}[-\s]?[\d\*]{4}[-\s]?[\d\*]{4}[-\s]?[\d\*]{4}/g,'')
+    .replace(/(승인|거래|카드)\s*번호\s*[:\-]?\s*\d+/gi,'')
+    .replace(/\s{2,}/g,' ').trim();
+}
 
-// ═══════════════════════════════════════
-//  설정 로드 / 저장
-// ═══════════════════════════════════════
-function loadSett() {
-  const k = G('api_key');
-  document.getElementById('ki').value = k ? '•'.repeat(20) : '';
-  document.getElementById('ms').value = G('model') || 'claude-sonnet-4-6';
-  document.getElementById('cs').value = G('comp_kb') || '800';
-  document.getElementById('qs').value = G('comp_q')  || '0.85';
+/* ─────────────────────────────────────
+   열 너비 자동 조정
+   DOM Span 기반 측정 → 한글 포함 정확
+───────────────────────────────────── */
+// 측정용 숨김 span (실제 DOM 폰트로 측정)
+const _ruler = document.createElement('span');
+_ruler.style.cssText =
+  'position:fixed;top:-9999px;left:-9999px;visibility:hidden;' +
+  'white-space:nowrap;font-size:12px;' +
+  'font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;' +
+  'padding:0;margin:0;border:none;';
+document.documentElement.appendChild(_ruler);
+
+function measureTxt(s){_ruler.textContent=String(s||'');return _ruler.offsetWidth;}
+
+function autoColWidths(){
+  const table=document.getElementById('rt');
+  if(!table||!table.querySelector('tbody tr')) return;
+
+  const ths  = table.querySelectorAll('thead th');
+  const rows = table.querySelectorAll('tbody tr');
+  const N    = ths.length;
+  const PAD  = 32; // 좌우 패딩 합계
+
+  // 헤더 텍스트 너비로 초기값
+  const widths = Array.from(ths).map(th=>measureTxt(th.textContent)+PAD);
+
+  // 각 행 데이터 측정
+  rows.forEach(row=>{
+    row.querySelectorAll('td').forEach((td,i)=>{
+      if(i>=N) return;
+      const inp=td.querySelector('input');
+      const txt=inp?inp.value:td.textContent.trim();
+      widths[i]=Math.max(widths[i], measureTxt(txt)+PAD);
+    });
+  });
+
+  // 마지막 열(삭제버튼)은 고정
+  widths[N-1]=38;
+
+  // colgroup으로 min-width 적용 (table-layout:auto 이므로 내용 더 길면 더 넓어짐)
+  let cg=table.querySelector('colgroup');
+  if(!cg){cg=document.createElement('colgroup');table.prepend(cg);}
+  cg.innerHTML=widths.map(w=>`<col style="width:${Math.ceil(w)}px">`).join('');
+  table.style.width='max-content';
+}
+
+/* ─────────────────────────────────────
+   설정
+───────────────────────────────────── */
+function loadSett(){
+  const k=G('api_key');
+  document.getElementById('ki').value=k?'•'.repeat(20):'';
+  document.getElementById('ms').value=G('model')||'claude-sonnet-4-6';
+  document.getElementById('cs').value=G('comp_kb')||'800';
+  document.getElementById('qs').value=G('comp_q')||'0.85';
   updBadge(!!k);
 }
-function saveKey() {
-  const v = document.getElementById('ki').value.trim();
-  if(v && !v.startsWith('•')) { S('api_key',v); document.getElementById('ki').value='•'.repeat(20); }
-  updBadge(!!G('api_key'));
-  flash('sok');
-}
-function delKey() {
-  localStorage.removeItem('api_key');
-  document.getElementById('ki').value='';
-  updBadge(false);
-}
-function saveSett() {
-  const v = document.getElementById('ki').value.trim();
-  if(v && !v.startsWith('•')) S('api_key',v);
-  S('model',   document.getElementById('ms').value);
-  S('comp_kb', document.getElementById('cs').value);
-  S('comp_q',  document.getElementById('qs').value);
-  updBadge(!!G('api_key'));
-  flash('sok');
-}
-function updBadge(has) {
-  const b = document.getElementById('kb');
-  b.textContent = has?'설정됨':'미설정';
-  b.className = 'kbadge '+(has?'on':'off');
-}
-function chkKey() {
-  const has = !!G('api_key');
-  const el = document.getElementById('nokey');
-  el.style.display = has?'none':'block';
-}
-function flash(id) {
-  const el=document.getElementById(id);
-  el.style.display='block';
-  setTimeout(()=>el.style.display='none',2800);
+function saveKey(){const v=document.getElementById('ki').value.trim();if(v&&!v.startsWith('•')){S('api_key',v);document.getElementById('ki').value='•'.repeat(20);}updBadge(!!G('api_key'));flash('sok');}
+function delKey(){localStorage.removeItem('api_key');document.getElementById('ki').value='';updBadge(false);}
+function saveSett(){const v=document.getElementById('ki').value.trim();if(v&&!v.startsWith('•'))S('api_key',v);S('model',document.getElementById('ms').value);S('comp_kb',document.getElementById('cs').value);S('comp_q',document.getElementById('qs').value);updBadge(!!G('api_key'));flash('sok');}
+function updBadge(has){const b=document.getElementById('kb');b.textContent=has?'설정됨':'미설정';b.className='kbadge '+(has?'on':'off');}
+function chkKey(){document.getElementById('nokey').style.display=G('api_key')?'none':'block';}
+function flash(id){const el=document.getElementById(id);el.style.display='block';setTimeout(()=>el.style.display='none',2800);}
+
+/* ─────────────────────────────────────
+   이미지 압축
+───────────────────────────────────── */
+async function compress(file){
+  const limitKB=parseInt(G('comp_kb')||'800');const quality=parseFloat(G('comp_q')||'0.85');
+  if(!limitKB||file.size<=limitKB*1024){return new Promise(res=>{const r=new FileReader();r.onload=e=>{const[,b64]=e.target.result.split(',');res({b64,mime:file.type||'image/jpeg',compressed:false});};r.readAsDataURL(file);});}
+  return new Promise(res=>{const img=new Image();const url=URL.createObjectURL(file);img.onload=()=>{URL.revokeObjectURL(url);let{width:w,height:h}=img;if(w>1600){h=Math.round(h*1600/w);w=1600;}const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);let q=quality,data;do{data=cv.toDataURL('image/jpeg',q);q-=0.07;}while(data.length*0.75>limitKB*1024&&q>0.2);res({b64:data.split(',')[1],mime:'image/jpeg',compressed:true});};img.src=url;});
 }
 
-// ═══════════════════════════════════════
-//  이미지 자동 압축 (Canvas)
-// ═══════════════════════════════════════
-async function compress(file) {
-  const limitKB = parseInt(G('comp_kb')||'800');
-  const quality = parseFloat(G('comp_q')||'0.85');
-
-  // 압축 불필요
-  if(!limitKB || file.size <= limitKB*1024) {
-    return new Promise(res => {
-      const r = new FileReader();
-      r.onload = e => {
-        const [,b64] = e.target.result.split(',');
-        res({b64, mime: file.type||'image/jpeg', compressed:false});
-      };
-      r.readAsDataURL(file);
-    });
-  }
-
-  // Canvas 압축
-  return new Promise(res => {
-    const img = new Image();
-    const url = URL.createObjectURL(file);
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      let {width:w, height:h} = img;
-      if(w > 1600){ h = Math.round(h*1600/w); w=1600; }
-      const cv = document.createElement('canvas');
-      cv.width=w; cv.height=h;
-      cv.getContext('2d').drawImage(img,0,0,w,h);
-      let q = quality, data;
-      do { data = cv.toDataURL('image/jpeg', q); q-=0.07; }
-      while(data.length*0.75 > limitKB*1024 && q > 0.2);
-      res({b64: data.split(',')[1], mime:'image/jpeg', compressed:true});
-    };
-    img.src = url;
-  });
+/* ─────────────────────────────────────
+   Claude API
+───────────────────────────────────── */
+async function claude(b64,mime,prompt){
+  const key=G('api_key');if(!key)throw new Error('API 키가 설정되지 않았습니다.');
+  const model=G('model')||'claude-sonnet-4-6';
+  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model,max_tokens:2048,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:mime,data:b64}},{type:'text',text:prompt}]}]})});
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||`API 오류 (${r.status})`);}
+  return(await r.json()).content[0].text;
 }
+function pj(txt){const m=txt.match(/\{[\s\S]*\}/);if(m){try{return JSON.parse(m[0]);}catch(e){}}return null;}
 
-// ═══════════════════════════════════════
-//  Claude API 호출
-// ═══════════════════════════════════════
-async function claude(b64, mime, prompt) {
-  const key = G('api_key');
-  if(!key) throw new Error('API 키가 설정되지 않았습니다.');
-  const model = G('model')||'claude-sonnet-4-6';
+/* ─────────────────────────────────────
+   드래그앤드롭
+───────────────────────────────────── */
+function dov(e){e.preventDefault();document.getElementById('dz').classList.add('over');}
+function dlv(e){document.getElementById('dz').classList.remove('over');}
+function ddrop(e){e.preventDefault();document.getElementById('dz').classList.remove('over');const fs=Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/'));if(fs.length)push(fs);}
 
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key': key,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body: JSON.stringify({
-      model, max_tokens:2048,
-      messages:[{role:'user', content:[
-        {type:'image', source:{type:'base64', media_type:mime, data:b64}},
-        {type:'text',  text:prompt}
-      ]}]
-    })
-  });
-  if(!r.ok){
-    const e = await r.json().catch(()=>({}));
-    throw new Error(e.error?.message || `API 오류 (${r.status})`);
-  }
-  return (await r.json()).content[0].text;
-}
-
-// JSON 파싱 헬퍼
-function pj(txt) {
-  const m = txt.match(/\{[\s\S]*\}/);
-  if(m){ try{return JSON.parse(m[0]);}catch(e){} }
-  return null;
-}
-
-// ═══════════════════════════════════════
-//  드래그 앤 드롭
-// ═══════════════════════════════════════
-function dov(e){ e.preventDefault(); document.getElementById('dz').classList.add('over'); }
-function dlv(e){ document.getElementById('dz').classList.remove('over'); }
-function ddrop(e){
-  e.preventDefault();
-  document.getElementById('dz').classList.remove('over');
-  const fs = Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/'));
-  if(fs.length) push(fs);
-}
-
-// ═══════════════════════════════════════
-//  파일 관리
-// ═══════════════════════════════════════
-let FILES = [];
-
-function addFiles(e){ push(Array.from(e.target.files)); e.target.value=''; }
-
-function push(fs) {
-  fs.forEach(f => FILES.push({file:f, url:URL.createObjectURL(f)}));
-  render();
+/* ─────────────────────────────────────
+   파일 관리
+───────────────────────────────────── */
+let FILES=[];
+function addFiles(e){push(Array.from(e.target.files));e.target.value='';}
+function push(fs){
+  fs.forEach(f=>FILES.push({file:f,url:URL.createObjectURL(f)}));render();
   document.getElementById('exBtn').style.display='inline-flex';
   document.getElementById('clBtn').style.display='inline-flex';
-  const lim = parseInt(G('comp_kb')||'800');
-  const big = lim ? fs.filter(f=>f.size>lim*1024).length : 0;
-  if(big) sbar(`ℹ️ ${big}개 이미지가 ${lim}KB 초과 → 자동 압축됩니다.`, 'warn');
+  const lim=parseInt(G('comp_kb')||'800');
+  const big=lim?fs.filter(f=>f.size>lim*1024).length:0;
+  if(big)sbar(`ℹ️ ${big}개 이미지가 ${lim}KB 초과 → 자동 압축됩니다.`,'warn');
 }
-
-function render() {
-  const lim = parseInt(G('comp_kb')||'800');
-  document.getElementById('grid').innerHTML = FILES.map((f,i)=>`
-    <div class="icard">
-      <button class="idel" onclick="del(${i})" title="삭제">×</button>
-      <img src="${f.url}" alt="">
-      ${lim&&f.file.size>lim*1024 ? '<span class="ibadge">압축예정</span>':''}
-      <div class="ilbl">${f.file.name.length>14?f.file.name.slice(0,13)+'…':f.file.name}<br>
-      <span style="color:#ccc">${(f.file.size/1024).toFixed(0)}KB</span></div>
-    </div>`).join('');
+function render(){
+  const lim=parseInt(G('comp_kb')||'800');
+  document.getElementById('grid').innerHTML=FILES.map((f,i)=>`<div class="icard"><button class="idel" onclick="del(${i})" title="삭제">×</button><img src="${f.url}" alt="">${lim&&f.file.size>lim*1024?'<span class="ibadge">압축예정</span>':''}<div class="ilbl">${f.file.name.length>14?f.file.name.slice(0,13)+'…':f.file.name}<br><span style="color:#ccc">${(f.file.size/1024).toFixed(0)}KB</span></div></div>`).join('');
 }
+function del(i){URL.revokeObjectURL(FILES[i].url);FILES.splice(i,1);render();if(!FILES.length){document.getElementById('exBtn').style.display='none';document.getElementById('clBtn').style.display='none';}}
+function clearAll(){FILES.forEach(f=>URL.revokeObjectURL(f.url));FILES=[];render();document.getElementById('exBtn').style.display='none';document.getElementById('clBtn').style.display='none';document.getElementById('res').style.display='none';document.getElementById('tb').innerHTML='';sbar('','');}
 
-function del(i){
-  URL.revokeObjectURL(FILES[i].url);
-  FILES.splice(i,1);
-  render();
-  if(!FILES.length){
-    document.getElementById('exBtn').style.display='none';
-    document.getElementById('clBtn').style.display='none';
-  }
-}
-
-function clearAll(){
-  FILES.forEach(f=>URL.revokeObjectURL(f.url));
-  FILES=[];
-  render();
-  document.getElementById('exBtn').style.display='none';
-  document.getElementById('clBtn').style.display='none';
-  document.getElementById('res').style.display='none';
-  document.getElementById('tb').innerHTML='';
-  sbar('','');
-}
-
-// ═══════════════════════════════════════
-//  데이터 추출 (Claude AI)
-// ═══════════════════════════════════════
-const PROMPT = `이 영수증/거래명세서 이미지에서 데이터를 추출하세요.
+/* ─────────────────────────────────────
+   Claude 프롬프트
+───────────────────────────────────── */
+const PROMPT=`이 영수증/거래명세서/세금계산서 이미지에서 데이터를 추출하세요.
 JSON 형식으로만 응답하세요 (설명 없이).
 
 {
   "date": "거래날짜 YYYY-MM-DD (없으면 빈 문자열)",
-  "merchant": "업체명/가맹점명",
+  "merchant": "상호명/가맹점명",
+  "business_reg": "사업자등록번호 (000-00-00000 형식, 없으면 빈 문자열)",
   "items": [
-    {"name":"품목명", "qty":수량숫자, "unit_price":단가숫자, "amount":금액숫자}
+    {"name":"품목명", "qty":수량숫자, "unit_price":단가숫자, "amount":단가×수량숫자}
   ],
-  "tax": 세금숫자(없으면 0),
+  "tax": 세액숫자(없으면 0),
   "total": 합계금액숫자,
   "payment": "결제수단(현금/카드/계좌이체 등, 없으면 빈 문자열)",
   "memo": "기타 참고사항(없으면 빈 문자열)"
 }
 
-규칙: 숫자는 쉼표·기호 없이 순수 숫자만. 품목이 없으면 items:[].`;
+규칙:
+- 숫자는 쉼표·기호 없이 순수 숫자만
+- 사업자등록번호는 하이픈 포함 (예: 123-45-67890)
+- 품목이 없으면 items:[]
+- 공급가액과 세액이 구분되지 않으면 합계÷1.1=공급가액으로 역산
+- memo에는 카드번호·승인번호 등 결제 식별번호를 절대 포함하지 마세요`;
 
-async function extract() {
-  if(!G('api_key')){ go(1); return; }
-  if(!FILES.length) return;
-
+/* ─────────────────────────────────────
+   데이터 추출
+───────────────────────────────────── */
+async function extract(){
+  if(!G('api_key')){go(1);return;}if(!FILES.length)return;
   showLoad(`영수증 분석 중 (0/${FILES.length})`);
-  document.getElementById('tb').innerHTML='';
-  document.getElementById('res').style.display='none';
+  document.getElementById('tb').innerHTML='';document.getElementById('res').style.display='none';
   const rows=[];
-
   for(let i=0;i<FILES.length;i++){
     document.getElementById('lmsg').textContent=`영수증 분석 중 (${i+1}/${FILES.length}) — ${FILES[i].file.name}`;
     try{
-      const {b64,mime,compressed} = await compress(FILES[i].file);
-      FILES[i].comp = compressed;
-      const txt = await claude(b64, mime, PROMPT);
-      const d = pj(txt);
+      const{b64,mime,compressed}=await compress(FILES[i].file);FILES[i].comp=compressed;
+      const txt=await claude(b64,mime,PROMPT);const d=pj(txt);
       if(d){
-        const items=(d.items&&d.items.length)?d.items:[{}];
-        items.forEach((it,ii)=>rows.push({
-          date:    ii?'':d.date||'',
-          merchant:ii?'':d.merchant||'',
-          name:    it.name||'',
-          qty:     it.qty!=null?it.qty:'',
-          up:      it.unit_price!=null?it.unit_price:'',
-          amt:     it.amount!=null?it.amount:'',
-          tax:     ii?'':d.tax||0,
-          total:   ii?'':d.total||'',
-          payment: ii?'':d.payment||'',
-          memo:    ii?'':d.memo||''
-        }));
-      } else {
-        rows.push({date:'',merchant:FILES[i].file.name,name:'파싱 실패',qty:'',up:'',amt:'',tax:'',total:'',payment:'',memo:txt.slice(0,80)});
-      }
-    } catch(err){
-      rows.push({date:'',merchant:'오류',name:err.message.slice(0,80),qty:'',up:'',amt:'',tax:'',total:'',payment:'',memo:''});
-    }
+        const items=d.items&&d.items.length?d.items:null;
+        if(items){
+          // 품목 행: 공급가액·세액·합계 비움
+          items.forEach((it,ii)=>rows.push({date:ii?'':d.date||'',merchant:ii?'':d.merchant||'',business_reg:ii?'':d.business_reg||'',name:it.name||'',qty:it.qty!=null?it.qty:'',up:it.unit_price!=null?it.unit_price:'',amt:'',tax:'',total:'',payment:ii?'':d.payment||'',memo:'',_sub:false}));
+          // 소계 행: 전체 공급가액·세액·합계
+          const sub=(d.total!=null&&d.tax!=null)?d.total-d.tax:'';
+          rows.push({date:'',merchant:'',business_reg:'',name:'[ 소  계 ]',qty:'',up:'',amt:sub,tax:d.tax!=null?d.tax:'',total:d.total!=null?d.total:'',payment:'',memo:'',_sub:true});
+        }else{
+          // 품목 없는 영수증(카드전표 등): 단일 행으로 전체 금액 표시
+          const sub=(d.total!=null&&d.tax!=null)?d.total-d.tax:'';
+          rows.push({date:d.date||'',merchant:d.merchant||'',business_reg:d.business_reg||'',name:'',qty:'',up:'',amt:sub||'',tax:d.tax!=null?d.tax:'',total:d.total!=null?d.total:'',payment:d.payment||'',memo:'',_sub:false});
+        }
+      }else{rows.push({date:'',merchant:FILES[i].file.name,business_reg:'',name:'파싱 실패',qty:'',up:'',amt:'',tax:'',total:'',payment:'',memo:txt.slice(0,80)});}
+    }catch(err){rows.push({date:'',merchant:'오류',business_reg:'',name:err.message.slice(0,80),qty:'',up:'',amt:'',tax:'',total:'',payment:'',memo:''});}
   }
-
-  hideLoad();
-  render(); // 압축 뱃지 갱신
-  buildTable(rows);
-  sbar(`✅ ${FILES.length}개 영수증 추출 완료. 내용을 확인·수정 후 엑셀을 다운로드하세요.`, 'ok');
+  hideLoad();render();buildTable(rows);
+  sbar(`✅ ${FILES.length}개 영수증 추출 완료. 내용을 확인·수정 후 엑셀을 다운로드하세요.`,'ok');
 }
 
+/* ─────────────────────────────────────
+   테이블 빌드
+───────────────────────────────────── */
 function buildTable(rows){
   const e=s=>String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
-  document.getElementById('tb').innerHTML = rows.map(r=>`<tr>
+  const n=v=>(v!==''&&v!=null)?fmtNum(v):'';
+  document.getElementById('tb').innerHTML=rows.map(r=>`<tr${r._sub?' class="sub-row"':''}>
     <td><input value="${e(r.date)}"></td>
     <td><input value="${e(r.merchant)}"></td>
+    <td><input value="${e(r.business_reg)}"></td>
     <td><input value="${e(r.name)}"></td>
-    <td class="num"><input value="${r.qty}"></td>
-    <td class="num"><input value="${r.up}"></td>
-    <td class="num"><input value="${r.amt}"></td>
-    <td class="num"><input value="${r.tax}"></td>
-    <td class="num"><input value="${r.total}"></td>
+    <td class="num"><input value="${n(r.qty)}"></td>
+    <td class="num"><input value="${n(r.up)}"></td>
+    <td class="num"><input value="${n(r.amt)}"></td>
+    <td class="num"><input value="${n(r.tax)}"></td>
+    <td class="num"><input value="${n(r.total)}"></td>
     <td><input value="${e(r.payment)}"></td>
     <td><input value="${e(r.memo)}"></td>
     <td><button class="del-btn" onclick="this.closest('tr').remove()">✕</button></td>
   </tr>`).join('');
+  document.querySelectorAll('#tb .num input').forEach(bindNumInput);
   document.getElementById('res').style.display='block';
+  // _ruler가 DOM에 있을 때 측정해야 정확 → 두 프레임 후 실행
+  requestAnimationFrame(()=>requestAnimationFrame(autoColWidths));
 }
 
 function addRow(){
   const tr=document.createElement('tr');
-  tr.innerHTML=`<td><input></td><td><input></td><td><input></td>
-    <td class="num"><input></td><td class="num"><input></td><td class="num"><input></td>
-    <td class="num"><input></td><td class="num"><input></td>
-    <td><input></td><td><input></td>
-    <td><button class="del-btn" onclick="this.closest('tr').remove()">✕</button></td>`;
+  tr.innerHTML=`<td><input></td><td><input></td><td><input></td><td><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td><input></td><td><input></td><td><button class="del-btn" onclick="this.closest('tr').remove()">✕</button></td>`;
   document.getElementById('tb').appendChild(tr);
+  tr.querySelectorAll('.num input').forEach(bindNumInput);
   document.getElementById('res').style.display='block';
+  requestAnimationFrame(()=>requestAnimationFrame(autoColWidths));
 }
 
-// ═══════════════════════════════════════
-//  엑셀 다운로드 (SheetJS 내장 생성)
-// ═══════════════════════════════════════
+/* ─────────────────────────────────────
+   엑셀 다운로드
+───────────────────────────────────── */
 function dlXlsx(){
   if(typeof XLSX==='undefined'){alert('SheetJS 로딩 중입니다. 잠시 후 다시 시도하세요.');return;}
-
-  const HDR = ['날짜','업체명','품목','수량','단가','공급가액','세금','합계','결제수단','비고'];
-  const data = [HDR];
-  let grandTotal=0;
-  const merch={};
-
+  const HDR=['날짜','상호','사업자번호','품목','수량','단가','공급가액','세액','합계','결제수단','비고'];
+  const data=[HDR];let grandTotal=0;const merch={};
   document.querySelectorAll('#tb tr').forEach(tr=>{
-    const inp = tr.querySelectorAll('td input');
-    if(inp.length<10) return;
-    const row = Array.from(inp).slice(0,10).map((c,i)=>{
-      const v=c.value.trim();
-      // 숫자 컬럼(3~7)은 숫자로
-      if(i>=3&&i<=7&&v!==''&&!isNaN(v)) return Number(v);
-      return v;
+    const inp=tr.querySelectorAll('td input');if(inp.length<11)return;
+    const row=Array.from(inp).slice(0,11).map((c,i)=>{
+      const v=rawNum(c.value).trim();
+      if(i>=4&&i<=8&&v!==''&&!isNaN(v))return Number(v);
+      return c.value.trim();
     });
     data.push(row);
-    if(row[1]){merch[row[1]]=(merch[row[1]]||0)+(Number(row[7])||0);}
-    grandTotal += Number(row[7])||0;
+    if(row[1]){merch[row[1]]=(merch[row[1]]||0)+(Number(row[8])||0);}
+    grandTotal+=Number(row[8])||0;
   });
-
-  const wb = XLSX.utils.book_new();
-
-  // ─ 시트 1: 상세 데이터
-  const ws1 = XLSX.utils.aoa_to_sheet(data);
-  ws1['!cols']=[{wch:12},{wch:20},{wch:28},{wch:7},{wch:12},{wch:13},{wch:11},{wch:13},{wch:11},{wch:22}];
-  XLSX.utils.book_append_sheet(wb, ws1, '영수증 데이터');
-
-  // ─ 시트 2: 업체별 요약
-  const sum=[['업체명','건수','합계 금액'],
-    ...Object.entries(merch).map(([m,t])=>[m,data.filter(r=>r[1]===m).length-0,t]),
-    ['합  계','',grandTotal]];
+  const wb=XLSX.utils.book_new();
+  const ws1=XLSX.utils.aoa_to_sheet(data);
+  ws1['!cols']=[{wch:12},{wch:22},{wch:16},{wch:28},{wch:7},{wch:12},{wch:14},{wch:12},{wch:14},{wch:11},{wch:22}];
+  const numCols=[4,5,6,7,8];
+  data.slice(1).forEach((row,ri)=>{numCols.forEach(ci=>{const addr=XLSX.utils.encode_cell({r:ri+1,c:ci});if(ws1[addr]&&typeof ws1[addr].v==='number')ws1[addr].z='#,##0';});});
+  XLSX.utils.book_append_sheet(wb,ws1,'영수증 데이터');
+  const bregMap={};data.slice(1).forEach(r=>{if(r[1])bregMap[r[1]]=r[2]||'';});
+  const sum=[['상호','사업자번호','건수','공급가액','세액','합계']];
+  Object.keys(merch).forEach(m=>{const rs=data.slice(1).filter(r=>r[1]===m);sum.push([m,bregMap[m]||'',rs.length,rs.reduce((s,r)=>s+(Number(r[6])||0),0),rs.reduce((s,r)=>s+(Number(r[7])||0),0),merch[m]]);});
+  sum.push(['합  계','','',data.slice(1).reduce((s,r)=>s+(Number(r[6])||0),0),data.slice(1).reduce((s,r)=>s+(Number(r[7])||0),0),grandTotal]);
   const ws2=XLSX.utils.aoa_to_sheet(sum);
-  ws2['!cols']=[{wch:22},{wch:8},{wch:16}];
-  XLSX.utils.book_append_sheet(wb, ws2, '업체별 요약');
-
-  XLSX.writeFile(wb, `영수증_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.xlsx`);
+  ws2['!cols']=[{wch:22},{wch:16},{wch:6},{wch:14},{wch:12},{wch:14}];
+  [3,4,5].forEach(ci=>{sum.slice(1).forEach((_,ri)=>{const addr=XLSX.utils.encode_cell({r:ri+1,c:ci});if(ws2[addr]&&typeof ws2[addr].v==='number')ws2[addr].z='#,##0';});});
+  XLSX.utils.book_append_sheet(wb,ws2,'상호별 요약');
+  XLSX.writeFile(wb,`영수증_${new Date().toISOString().slice(0,10).replace(/-/g,'')}.xlsx`);
 }
 
-// ═══════════════════════════════════════
-//  유틸
-// ═══════════════════════════════════════
-function sbar(msg, type){
-  const el=document.getElementById('sb');
-  el.textContent=msg;
-  el.className='bar'+(type?' '+type:'');
-  el.style.display=msg?'block':'none';
-}
+/* ─────────────────────────────────────
+   유틸
+───────────────────────────────────── */
+function sbar(msg,type){const el=document.getElementById('sb');el.textContent=msg;el.className='bar'+(type?' '+type:'');el.style.display=msg?'block':'none';}
 function showLoad(m){document.getElementById('lmsg').textContent=m;document.getElementById('ov').classList.add('show');}
 function hideLoad(){document.getElementById('ov').classList.remove('show');}
-
-// ─ 초기화
 document.addEventListener('DOMContentLoaded',()=>{loadSett();chkKey();});
 </script>
 </body>
