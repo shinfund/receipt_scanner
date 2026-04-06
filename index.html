@@ -88,6 +88,9 @@ table.rt{border-collapse:collapse;font-size:12px;table-layout:auto;width:max-con
 /* ▸ 소계 행 */
 .rt tbody tr.sub-row td{background:#dde5ff !important;font-weight:700;border-top:2px solid #a5b4fc;color:#1e3a8a}
 
+/* ▸ 합계 행 (연두색 배경) */
+.rt tbody tr.total-row td{background:#dcfce7 !important;font-weight:700;border-top:2px solid #86efac;color:#166534}
+
 .scard{background:#fff;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:22px;max-width:520px;margin-bottom:14px}
 .scard h3{font-size:15px;font-weight:700;margin-bottom:16px;color:#333}
 .fg{margin-bottom:15px}
@@ -154,7 +157,6 @@ table.rt{border-collapse:collapse;font-size:12px;table-layout:auto;width:max-con
       <table class="rt" id="rt">
         <thead><tr>
           <th>날짜</th><th>상호</th><th>사업자번호</th><th>품목</th>
-          <th class="num">수량</th><th class="num">단가</th>
           <th class="num">공급가액</th><th class="num">세액</th><th class="num">합계</th>
           <th>결제수단</th><th>비고</th><th></th>
         </tr></thead>
@@ -408,19 +410,13 @@ async function extract(){
       const txt=await claude(b64,mime,PROMPT);const d=pj(txt);
       if(d){
         const items=d.items&&d.items.length?d.items:null;
-        if(items){
-          // 품목 행: 공급가액·세액·합계 비움
-          items.forEach((it,ii)=>rows.push({date:ii?'':d.date||'',merchant:ii?'':d.merchant||'',business_reg:ii?'':d.business_reg||'',name:it.name||'',qty:it.qty!=null?it.qty:'',up:it.unit_price!=null?it.unit_price:'',amt:'',tax:'',total:'',payment:ii?'':d.payment||'',memo:'',_sub:false}));
-          // 소계 행: 전체 공급가액·세액·합계
-          const sub=(d.total!=null&&d.tax!=null)?d.total-d.tax:'';
-          rows.push({date:'',merchant:'',business_reg:'',name:'[ 소  계 ]',qty:'',up:'',amt:sub,tax:d.tax!=null?d.tax:'',total:d.total!=null?d.total:'',payment:'',memo:'',_sub:true});
-        }else{
-          // 품목 없는 영수증(카드전표 등): 단일 행으로 전체 금액 표시
-          const sub=(d.total!=null&&d.tax!=null)?d.total-d.tax:'';
-          rows.push({date:d.date||'',merchant:d.merchant||'',business_reg:d.business_reg||'',name:'',qty:'',up:'',amt:sub||'',tax:d.tax!=null?d.tax:'',total:d.total!=null?d.total:'',payment:d.payment||'',memo:'',_sub:false});
-        }
-      }else{rows.push({date:'',merchant:FILES[i].file.name,business_reg:'',name:'파싱 실패',qty:'',up:'',amt:'',tax:'',total:'',payment:'',memo:txt.slice(0,80)});}
-    }catch(err){rows.push({date:'',merchant:'오류',business_reg:'',name:err.message.slice(0,80),qty:'',up:'',amt:'',tax:'',total:'',payment:'',memo:''});}
+        // 품목명: 1개면 그대로, 2개 이상이면 첫 품목 + ' 외'
+        const nameStr=items?(items.length===1?(items[0].name||''):(items[0].name||'')+' 외'):'';
+        const sub=(d.total!=null&&d.tax!=null)?d.total-d.tax:'';
+        // 영수증 1개당 1줄
+        rows.push({date:d.date||'',merchant:d.merchant||'',business_reg:d.business_reg||'',name:nameStr,amt:sub!==''?sub:'',tax:d.tax!=null?d.tax:'',total:d.total!=null?d.total:'',payment:d.payment||'',memo:'',_sub:false});
+      }else{rows.push({date:'',merchant:FILES[i].file.name,business_reg:'',name:'파싱 실패',amt:'',tax:'',total:'',payment:'',memo:txt.slice(0,80),_sub:false});}
+    }catch(err){rows.push({date:'',merchant:'오류',business_reg:'',name:err.message.slice(0,80),amt:'',tax:'',total:'',payment:'',memo:'',_sub:false});}
   }
   hideLoad();render();buildTable(rows);
   sbar(`✅ ${FILES.length}개 영수증 추출 완료. 내용을 확인·수정 후 엑셀을 다운로드하세요.`,'ok');
@@ -432,13 +428,20 @@ async function extract(){
 function buildTable(rows){
   const e=s=>String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   const n=v=>(v!==''&&v!=null)?fmtNum(v):'';
-  document.getElementById('tb').innerHTML=rows.map(r=>`<tr${r._sub?' class="sub-row"':''}>
+
+  // 합계 행 데이터 계산
+  let totalAmt=0, totalTax=0, totalSum=0;
+  rows.forEach(r=>{
+    if(r.amt!==''&&r.amt!=null&&!isNaN(rawNum(r.amt))){totalAmt+=Number(rawNum(r.amt));}
+    if(r.tax!==''&&r.tax!=null&&!isNaN(rawNum(r.tax))){totalTax+=Number(rawNum(r.tax));}
+    if(r.total!==''&&r.total!=null&&!isNaN(rawNum(r.total))){totalSum+=Number(rawNum(r.total));}
+  });
+
+  const tableHTML=rows.map(r=>`<tr${r._sub?' class="sub-row"':''}>
     <td><input value="${e(r.date)}"></td>
     <td><input value="${e(r.merchant)}"></td>
     <td><input value="${e(r.business_reg)}"></td>
     <td><input value="${e(r.name)}"></td>
-    <td class="num"><input value="${n(r.qty)}"></td>
-    <td class="num"><input value="${n(r.up)}"></td>
     <td class="num"><input value="${n(r.amt)}"></td>
     <td class="num"><input value="${n(r.tax)}"></td>
     <td class="num"><input value="${n(r.total)}"></td>
@@ -446,6 +449,22 @@ function buildTable(rows){
     <td><input value="${e(r.memo)}"></td>
     <td><button class="del-btn" onclick="this.closest('tr').remove()">✕</button></td>
   </tr>`).join('');
+
+  // 합계 행 HTML
+  const totalHTML=`<tr class="total-row">
+    <td><input value=""></td>
+    <td><input value=""></td>
+    <td><input value=""></td>
+    <td style="text-align:center;"><strong>합 계</strong></td>
+    <td class="num"><input value="${n(totalAmt)}" readonly></td>
+    <td class="num"><input value="${n(totalTax)}" readonly></td>
+    <td class="num"><input value="${n(totalSum)}" readonly></td>
+    <td><input value=""></td>
+    <td><input value=""></td>
+    <td></td>
+  </tr>`;
+
+  document.getElementById('tb').innerHTML=tableHTML+totalHTML;
   document.querySelectorAll('#tb .num input').forEach(bindNumInput);
   document.getElementById('res').style.display='block';
   // _ruler가 DOM에 있을 때 측정해야 정확 → 두 프레임 후 실행
@@ -454,7 +473,7 @@ function buildTable(rows){
 
 function addRow(){
   const tr=document.createElement('tr');
-  tr.innerHTML=`<td><input></td><td><input></td><td><input></td><td><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td><input></td><td><input></td><td><button class="del-btn" onclick="this.closest('tr').remove()">✕</button></td>`;
+  tr.innerHTML=`<td><input></td><td><input></td><td><input></td><td><input></td><td class="num"><input></td><td class="num"><input></td><td class="num"><input></td><td><input></td><td><input></td><td><button class="del-btn" onclick="this.closest('tr').remove()">✕</button></td>`;
   document.getElementById('tb').appendChild(tr);
   tr.querySelectorAll('.num input').forEach(bindNumInput);
   document.getElementById('res').style.display='block';
@@ -466,29 +485,30 @@ function addRow(){
 ───────────────────────────────────── */
 function dlXlsx(){
   if(typeof XLSX==='undefined'){alert('SheetJS 로딩 중입니다. 잠시 후 다시 시도하세요.');return;}
-  const HDR=['날짜','상호','사업자번호','품목','수량','단가','공급가액','세액','합계','결제수단','비고'];
+  const HDR=['날짜','상호','사업자번호','품목','공급가액','세액','합계','결제수단','비고'];
   const data=[HDR];let grandTotal=0;const merch={};
   document.querySelectorAll('#tb tr').forEach(tr=>{
-    const inp=tr.querySelectorAll('td input');if(inp.length<11)return;
-    const row=Array.from(inp).slice(0,11).map((c,i)=>{
+    if(tr.classList.contains('total-row'))return; // 합계 행 제외
+  const inp=tr.querySelectorAll('td input');if(inp.length<9)return;
+    const row=Array.from(inp).slice(0,9).map((c,i)=>{
       const v=rawNum(c.value).trim();
-      if(i>=4&&i<=8&&v!==''&&!isNaN(v))return Number(v);
+      if(i>=4&&i<=6&&v!==''&&!isNaN(v))return Number(v);
       return c.value.trim();
     });
     data.push(row);
-    if(row[1]){merch[row[1]]=(merch[row[1]]||0)+(Number(row[8])||0);}
-    grandTotal+=Number(row[8])||0;
+    if(row[1]){merch[row[1]]=(merch[row[1]]||0)+(Number(row[6])||0);}
+    grandTotal+=Number(row[6])||0;
   });
   const wb=XLSX.utils.book_new();
   const ws1=XLSX.utils.aoa_to_sheet(data);
-  ws1['!cols']=[{wch:12},{wch:22},{wch:16},{wch:28},{wch:7},{wch:12},{wch:14},{wch:12},{wch:14},{wch:11},{wch:22}];
-  const numCols=[4,5,6,7,8];
+  ws1['!cols']=[{wch:12},{wch:22},{wch:16},{wch:32},{wch:14},{wch:12},{wch:14},{wch:11},{wch:22}];
+  const numCols=[4,5,6];
   data.slice(1).forEach((row,ri)=>{numCols.forEach(ci=>{const addr=XLSX.utils.encode_cell({r:ri+1,c:ci});if(ws1[addr]&&typeof ws1[addr].v==='number')ws1[addr].z='#,##0';});});
   XLSX.utils.book_append_sheet(wb,ws1,'영수증 데이터');
   const bregMap={};data.slice(1).forEach(r=>{if(r[1])bregMap[r[1]]=r[2]||'';});
   const sum=[['상호','사업자번호','건수','공급가액','세액','합계']];
-  Object.keys(merch).forEach(m=>{const rs=data.slice(1).filter(r=>r[1]===m);sum.push([m,bregMap[m]||'',rs.length,rs.reduce((s,r)=>s+(Number(r[6])||0),0),rs.reduce((s,r)=>s+(Number(r[7])||0),0),merch[m]]);});
-  sum.push(['합  계','','',data.slice(1).reduce((s,r)=>s+(Number(r[6])||0),0),data.slice(1).reduce((s,r)=>s+(Number(r[7])||0),0),grandTotal]);
+  Object.keys(merch).forEach(m=>{const rs=data.slice(1).filter(r=>r[1]===m);sum.push([m,bregMap[m]||'',rs.length,rs.reduce((s,r)=>s+(Number(r[4])||0),0),rs.reduce((s,r)=>s+(Number(r[5])||0),0),merch[m]]);});
+  sum.push(['합  계','','',data.slice(1).reduce((s,r)=>s+(Number(r[4])||0),0),data.slice(1).reduce((s,r)=>s+(Number(r[5])||0),0),grandTotal]);
   const ws2=XLSX.utils.aoa_to_sheet(sum);
   ws2['!cols']=[{wch:22},{wch:16},{wch:6},{wch:14},{wch:12},{wch:14}];
   [3,4,5].forEach(ci=>{sum.slice(1).forEach((_,ri)=>{const addr=XLSX.utils.encode_cell({r:ri+1,c:ci});if(ws2[addr]&&typeof ws2[addr].v==='number')ws2[addr].z='#,##0';});});
