@@ -418,8 +418,15 @@ async function extract(){
       }else{rows.push({date:'',merchant:FILES[i].file.name,business_reg:'',name:'파싱 실패',amt:'',tax:'',total:'',payment:'',memo:txt.slice(0,80),_sub:false});}
     }catch(err){rows.push({date:'',merchant:'오류',business_reg:'',name:err.message.slice(0,80),amt:'',tax:'',total:'',payment:'',memo:'',_sub:false});}
   }
+  // 날짜 오름차순 정렬 (빈 날짜는 맨 뒤)
+  rows.sort((a,b)=>{
+    if(!a.date&&!b.date)return 0;
+    if(!a.date)return 1;
+    if(!b.date)return -1;
+    return a.date.localeCompare(b.date);
+  });
   hideLoad();render();buildTable(rows);
-  sbar(`✅ ${FILES.length}개 영수증 추출 완료. 내용을 확인·수정 후 엑셀을 다운로드하세요.`,'ok');
+  sbar(`✅ ${FILES.length}개 영수증 추출 완료 (날짜 오름차순 정렬). 내용을 확인·수정 후 엑셀을 다운로드하세요.`,'ok');
 }
 
 /* ─────────────────────────────────────
